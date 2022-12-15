@@ -1,0 +1,64 @@
+.body {
+    background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    height: 100vh;
+    position: relative;
+}
+
+
+.login1 {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: black;
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: rgba(0, 109, 192, 0.3) 0 1px 3px 0, rgb(60 64 67 / 15%) 0 4px 8px 3px;
+}
+
+.login1>h1 {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid white;
+}
+
+
+.formlogin input {
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: rgb(248, 243, 243);
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    outline: none;
+}
+
+
+
+.formlogin {
+    margin: 40px 0px 30px 0px ;
+
+
+}
+
+.Uname {
+    padding: 20px 0px;
+}
+
+.btnlo{
+    text-align: center;
+}
+
+.inputLo{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    background: red;
+    padding: 4px 30px;
+    border-radius: 5px;
+    font-size: 20px;
+}

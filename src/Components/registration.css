@@ -1,0 +1,55 @@
+.reg {
+    background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    height: 100vh;
+    position: relative;
+}
+.register {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: black;
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: rgba(5, 104, 180, 0.644) 0 1px 3px 0, rgb(60 64 67 / 15%) 0 4px 8px 3px;
+}
+
+.register>h1 {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid white;
+}
+
+.formd{
+    margin: 40px 0px 30px 0px ;
+}
+
+.formd input {
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: rgb(248, 243, 243);
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    outline: none;
+}
+.formd label{
+    margin: 20px 0px 9px 0px ;    
+}
+.registerbtn{
+  
+    text-align: center;
+}
+.registerbtn>input{
+    
+    border: none;
+    outline: none;
+    color: white;
+    background: red;
+    padding: 4px 30px;
+    border-radius: 5px;
+    font-size: 20px;
+}
