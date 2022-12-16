@@ -83,3 +83,88 @@ html,
 .forgot-password a {
   color: #167bff;
 }
+/* custom button */
+.button{
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-size: 16px;
+  border:none;
+  transition: 0.3s all ease-in-out;
+  
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+  background-color: transparent;
+  color: black;
+}
+
+.button:hover{
+  color: white;
+  background-color: #151414; 
+}
+
+
+
+
+/* <<<<<<<<<<<<<<<<<<<  REACT-DATA-TABLE-COMPONENT CUSTOM CSS START >>>>>>>>>>>>>*/
+/*  FOR TABLE HEADER ROW */
+.rdt_TableHead {
+  font-size: 17px !important;
+}
+
+/* FOR TABLE BODY ROWS */
+.rdt_TableRow {
+    font-size: 15px !important;
+}
+/* <<<<<<<<<<<<<<<<<<<  REACT-DATA-TABLE-COMPONENT CUSTOM CSS ENDS >>>>>>>>>>>>>*/
+
+
+
+.data-table-extensions > .data-table-extensions-action > button::after {
+  z-index: 10000000;
+  position: relative;
+}
+
+.rdt_TableHeadRow {
+  background-color:#f1f5f7 !important;
+  color: #2592cfd1;
+}
+
+
+.dropdown-toggle::after {
+  display: none !important; 
+}
+
+.doc-download-btn{
+  border: none;
+}
+.doc-download-btn > img{
+  height: 35px;
+}
+
+
+.main_btn {
+  background-color: var(--default-color);
+  color: #e3e3e3;
+  transition: 0.4s all ease-in-out;
+  cursor: pointer;
+  padding: 2px 23px;
+  border-radius: 4px;
+  font-size: 19px;
+  width: 7rem;
+}
+
+.main_btn_disabled {
+  background-color: #35383a;
+  color: #e3e3e3;
+  transition: 0.4s all ease-in-out;
+  cursor: pointer;
+  padding: 2px 23px;
+  border-radius: 4px;
+  font-size: 19px;
+  width: 7rem;
+}
+
+.main_btn:hover {
+  color: var(--whiteColor);
+  background-color: #0762c5;
+}
+
