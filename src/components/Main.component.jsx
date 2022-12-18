@@ -19,9 +19,47 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
+// table  import here 
+import { DataGrid ,GridToolbar} from '@mui/x-data-grid';
+
+
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'firstName', headerName: 'First name', width: 130 },
+  { field: 'lastName', headerName: 'Last name', width: 130 },
+  {
+    field: 'age',
+    headerName: 'Age',
+    type: 'number',
+    width: 90,
+  },
+  {
+    field: 'fullName',
+    headerName: 'Full name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 160,
+    valueGetter: (params) =>
+      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+];
+
+const rows = [
+  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+];
 
 
 const Main = () => {
+
 
   const pages = ['Products', 'Pricing', 'Blog'];
   const settings = ['Profile', 'Logout'];
@@ -47,55 +85,45 @@ const Main = () => {
   };
 
 
-  const columns = [
-    {
-      name: "Date",
-      //   selector: (row) => row._id,
-    },
-    {
-      name: "Name",
-      //   selector: (row) => row.district,
-      sortable: true,
-    }
-  ]
 
 
   return (
 
-    <AppBar position="static">
-    <Container maxWidth="xl">
-      <Toolbar disableGutters>
-        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-        <Typography
-          variant="h6"
-          noWrap
-          component="a"
-          href="/"
-          sx={{
-            mr: 2,
-            display: { xs: 'none', md: 'flex' },
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-        >
-          LOGO
-        </Typography>
+    <>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
 
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleOpenNavMenu}
-            color="inherit"
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* <Menu
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              {/* <Menu
             id="menu-appbar"
             anchorEl={anchorElNav}
             anchorOrigin={{
@@ -119,28 +147,28 @@ const Main = () => {
               </MenuItem>
             ))}
           </Menu> */}
-        </Box>
-        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-        <Typography
-          variant="h5"
-          noWrap
-          component="a"
-          href=""
-          sx={{
-            mr: 2,
-            display: { xs: 'flex', md: 'none' },
-            flexGrow: 1,
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-        >
-          LOGO
-        </Typography>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {/* {pages.map((page) => (
+            </Box>
+            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {/* {pages.map((page) => (
             <Button
               key={page}
               onClick={handleCloseNavMenu}
@@ -149,96 +177,57 @@ const Main = () => {
               {page}
             </Button>
           ))} */}
-        </Box>
+            </Box>
 
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-      </Toolbar>
-    </Container>
-  </AppBar>
-    // <div>
-    //   <nav class="navbar navbar-dark bg-primary">
-    //     <Stack direction="row" spacing={2}>
-    //       <Avatar sx={{ bgcolor: deepOrange[500] }}>S</Avatar>
-    //       {/* <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar> */}
-    //     </Stack>
-    //     <h4>Dashboard..!</h4>
-    //   </nav>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
 
-    //   <DataTable
-    //     columns={columns}
-    //     // data={filterdata}
-    //     pagination
-    //     fixedHeader
-    //     fixedHeaderScrollHeight='400px'
-    //     highlightOnHover
-    //     subHeader
-    //     subHeaderComponent={
-    //       <div className='w-100 d-flex justify-content-between'>
-    //         <input
-    //           type='text'
-    //           placeholder="Search here...."
-    //           className='w-25 form-control m-0'
-    //         //   value={search}
-    //         //   onChange={(e) => setSearch(e.target.value)}
-    //         />
+      <div className='container-fluid' style={{ marginTop: '20px' }}>
+      <div style={{ height: 400, width: '100%'  }}>
+      <DataGrid sx={{ m: 2 , backgroundColor: '#FFFFFF'}}
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        components={{ Toolbar: GridToolbar }}
+      />
+    </div>
+
+      </div>
 
 
-
-    //         <Dropdown>
-    //           <Dropdown.Toggle variant="light" id="dropdown-basic">
-    //             <img src="images/icon_Download.svg" alt="Download" />
-    //           </Dropdown.Toggle>
-
-    //           <Dropdown.Menu>
-    //             <div className="d-flex justify-content-around">
-    //               <button type="button"
-    //                 //    onClick={exportexcel}
-    //                 className="doc-download-btn">
-    //                 <img src="images/xls.png" alt="Download" className="img-fluid" />
-    //               </button>
-    //               <button type="button"
-    //                 //   onClick={exportPDF} 
-    //                 className="doc-download-btn">
-    //                 <img src="images/pdf.png" alt="Download" className="img-fluid" />
-    //               </button>
-    //             </div>
-    //           </Dropdown.Menu>
-    //         </Dropdown>
-
-
-
-    //       </div>
-    //     }
-    //   />
-    // </div>
+    </>
   );
 }
 
