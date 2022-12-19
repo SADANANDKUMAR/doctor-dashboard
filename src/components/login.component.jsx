@@ -65,7 +65,7 @@ handleMobile = (e) => {
 
 handlePassword = (e) => {
     this.setState({ pass: e.target.value });
-    if (e.target.value === '968686') {
+    if (e.target.value === '123456') {
         this.setState({ validPassword: true })
     } else {
         this.setState({ validPassword: false })
@@ -105,6 +105,7 @@ handleRemember = (e) => {
               type="mobile"
               className="form-control"
               placeholder="10 digit..."
+              maxlength="10"
               name="mobile" onChange={this.handleMobile}
             />
           </div>
@@ -114,7 +115,8 @@ handleRemember = (e) => {
             <input
               type="password"
               className="form-control"
-              placeholder="Enter password"
+              placeholder="Enter password 123456"
+              maxLength="6"
               onChange={this.handlePassword} 
             />
           </div>

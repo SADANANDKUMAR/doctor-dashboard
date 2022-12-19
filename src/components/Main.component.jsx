@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 // table  import here 
@@ -100,7 +101,23 @@ const Main = () => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+            <Link
+                        href="#"
+                        underline="none"
+                        sx={{
+                            mr: 1,
+                            display: { xs: 'none', md: 'flex' },
+                        }}
+                    >
+                        <img
+                            className="nav-logo"
+                            src="/images/PharynxAI_ogo.png"
+                            alt="Porousway Logo"
+                            width="40"
+                            height="40"
+                        />
+                        </Link>
             <Typography
               variant="h6"
               noWrap
@@ -116,7 +133,7 @@ const Main = () => {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+            PharynxAI
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -155,7 +172,25 @@ const Main = () => {
             ))}
           </Menu> */}
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+            {/* <Link
+                        href="#"
+                        underline="none"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                        }}
+                    >
+                        <img
+                            className="nav-logo"
+                            src="/images/PharynxAI_ogo.png"
+                            alt="Porousway Logo"
+                            width="40"
+                            height="40"
+                        />
+                        </Link> */}
+                        
+
             <Typography
               variant="h5"
               noWrap
@@ -172,7 +207,7 @@ const Main = () => {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+            PharynxAI
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {/* {pages.map((page) => (
