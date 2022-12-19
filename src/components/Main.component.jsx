@@ -1,10 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
-// import DataTable from 'react-data-table-component';
-// import Table from 'react-bootstrap/Table';
-// import { utils, writeFile } from 'xlsx';
-// import jsPDF from "jspdf";
-// import "jspdf-autotable";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,9 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useNavigate } from 'react-router-dom'
+
 
 // table  import here 
-import { DataGrid ,GridToolbar} from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Logout } from '@mui/icons-material';
 
 
 
@@ -43,25 +40,31 @@ const columns = [
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
   },
+  {
+    field: 'action',
+    headerName: 'Acton',
+    sortable: false,
+    width: 160
+  }
 ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, action: 'view' },
+  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42, action: 'view' },
+  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45, action: 'view' },
+  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16, action: 'view' },
+  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null, action: 'view' },
+  { id: 6, lastName: 'Melisandre', firstName: null, age: 150, action: 'view' },
+  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44, action: 'view' },
+  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36, action: 'view' },
+  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65, action: 'view' },
 ];
 
 
 const Main = () => {
 
 
-  const pages = ['Products', 'Pricing', 'Blog'];
+  // const pages = ['Products', 'Pricing', 'Blog'];
   const settings = ['Profile', 'Logout'];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -83,9 +86,13 @@ const Main = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-
-
+  const Navigate = useNavigate();
+  const Logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('FHI_admin_mobile');
+    sessionStorage.removeItem('FHI_admin_mobile');
+    Navigate("/login")
+  }
 
   return (
 
@@ -180,7 +187,7 @@ const Main = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title="Open Profile">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
@@ -201,11 +208,14 @@ const Main = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                {/* {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
+
+                <MenuItem>Profile</MenuItem>
+                <MenuItem onClick={Logout}>Logout</MenuItem>
               </Menu>
             </Box>
           </Toolbar>
@@ -213,16 +223,16 @@ const Main = () => {
       </AppBar>
 
       <div className='container-fluid' style={{ marginTop: '20px' }}>
-      <div style={{ height: 400, width: '100%'  }}>
-      <DataGrid sx={{ m: 2 , backgroundColor: '#FFFFFF'}}
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        components={{ Toolbar: GridToolbar }}
-      />
-    </div>
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid sx={{ m: 2, backgroundColor: '#FFFFFF' }}
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            components={{ Toolbar: GridToolbar }}
+          />
+        </div>
 
       </div>
 

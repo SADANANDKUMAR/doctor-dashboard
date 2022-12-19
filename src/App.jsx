@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import Login from './components/login.component'
 import SignUp from './components/signup.component'
 import Main from './components/Main.component'
+import Profile from './components/model/Profile'
 
 function App(props) {
 
@@ -46,6 +47,7 @@ function App(props) {
                 <Route path="/sign-up" element={<SignUp />} /> */}
             <Route path='/home' element={<Main />} />
             <Route path="*" element={<p>Path not resolved</p>} />
+            <Route path='/profile' element={<Profile/>}/>
           </Routes>
 
 
