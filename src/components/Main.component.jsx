@@ -14,6 +14,19 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import Modal from '@mui/material/Modal';
+
+import EditIcon from '@mui/icons-material/Edit';
+import Divider from '@mui/material/Divider';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { styled, alpha } from '@mui/material/styles';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
+
+
 
 
 // table  import here 
@@ -21,6 +34,60 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Logout } from '@mui/icons-material';
 
 
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'right'
+
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  '& .MuiPaper-root': {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color:
+      theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+    '& .MuiMenu-list': {
+      padding: '4px 0',
+    },
+    '& .MuiMenuItem-root': {
+      '& .MuiSvgIcon-root': {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      '&:active': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity,
+        ),
+      },
+    },
+  },
+}));
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -43,7 +110,77 @@ const columns = [
   },
   {
     field: 'action',
-    headerName: 'Acton',
+    headerName: 'Action',
+    renderCell: (cellValues) => {
+
+      const [anchorEl, setAnchorEl] = React.useState(null);
+      const open = Boolean(anchorEl);
+      const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+      const handleClose = () => {
+        setAnchorEl(null);
+      };
+      return (
+        <>
+          <Button
+            id="demo-customized-button"
+            aria-controls={open ? 'demo-customized-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            variant="contained"
+            disableElevation
+            onClick={handleClick}
+            endIcon={<KeyboardArrowDownIcon />}
+          >
+            View
+          </Button>
+
+          <StyledMenu
+            id="demo-customized-menu"
+            MenuListProps={{
+              'aria-labelledby': 'demo-customized-button',
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          ><MenuItem>Appointment Date</MenuItem>
+            <MenuItem onClick={handleClose} disableRipple>
+            <CalendarMonthIcon />
+              <Link
+                to={'/patient'}
+                underline="hover"
+              >
+              12/20/2022
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose} disableRipple>
+              <CalendarMonthIcon />
+              <Link
+                to={'/patient'}
+                underline="hover"
+              >
+              11/24/2022
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose} disableRipple>
+              <CalendarMonthIcon />
+              <Link
+                to={'/patient'}
+                underline="hover"
+              >
+              10/18/2022
+              </Link>
+            </MenuItem>
+
+          </StyledMenu>
+
+        </>
+        //   <button className='button mx-2'
+        //   onClick={() => alert('hello')}
+        // > view</button>
+      );
+    },
     sortable: false,
     width: 160
   }
@@ -66,7 +203,12 @@ const Main = () => {
 
 
   // const pages = ['Products', 'Pricing', 'Blog'];
-  const settings = ['Profile', 'Logout'];
+  // const settings = ['Profile', 'Logout'];
+
+  // model open and close model
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -94,6 +236,9 @@ const Main = () => {
     sessionStorage.removeItem('FHI_admin_mobile');
     Navigate("/login")
   }
+  const profile = () => {
+
+  }
 
   return (
 
@@ -103,21 +248,21 @@ const Main = () => {
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
             <Link
-                        href="#"
-                        underline="none"
-                        sx={{
-                            mr: 1,
-                            display: { xs: 'none', md: 'flex' },
-                        }}
-                    >
-                        <img
-                            className="nav-logo"
-                            src="/images/PharynxAI_ogo.png"
-                            alt="Porousway Logo"
-                            width="40"
-                            height="40"
-                        />
-                        </Link>
+              href="#"
+              underline="none"
+              sx={{
+                mr: 1,
+                display: { xs: 'none', md: 'flex' },
+              }}
+            >
+              <img
+                className="nav-logo"
+                src="/images/PharynxAI_ogo.png"
+                alt="Porousway Logo"
+                width="40"
+                height="40"
+              />
+            </Link>
             <Typography
               variant="h6"
               noWrap
@@ -133,7 +278,7 @@ const Main = () => {
                 textDecoration: 'none',
               }}
             >
-            PharynxAI
+              PharynxAI
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -189,7 +334,7 @@ const Main = () => {
                             height="40"
                         />
                         </Link> */}
-                        
+
 
             <Typography
               variant="h5"
@@ -207,7 +352,7 @@ const Main = () => {
                 textDecoration: 'none',
               }}
             >
-            PharynxAI
+              PharynxAI
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {/* {pages.map((page) => (
@@ -249,7 +394,7 @@ const Main = () => {
                   </MenuItem>
                 ))} */}
 
-                <MenuItem>Profile</MenuItem>
+                <MenuItem onClick={handleOpen}>Profile</MenuItem>
                 <MenuItem onClick={Logout}>Logout</MenuItem>
               </Menu>
             </Box>
@@ -264,14 +409,37 @@ const Main = () => {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            checkboxSelection
+            checkboxSelection={false}
             components={{ Toolbar: GridToolbar }}
           />
         </div>
 
       </div>
 
+      {/* model content start  */}
 
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Avatar src="/broken-image.jpg" />
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              DR. Shardendu
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+            <Button onClick={handleClose}>Close</Button>
+          </Box>
+
+        </Modal>
+      </div>
+
+      {/* model content end */}
     </>
   );
 }

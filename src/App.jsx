@@ -6,6 +6,8 @@ import Login from './components/login.component'
 import SignUp from './components/signup.component'
 import Main from './components/Main.component'
 import Profile from './components/model/Profile'
+import Patient from './components/Paitent_View'
+import List_apmt from './components/List_apmt'
 
 function App(props) {
 
@@ -48,6 +50,8 @@ function App(props) {
             <Route path='/home' element={<Main />} />
             <Route path="*" element={<p>Path not resolved</p>} />
             <Route path='/profile' element={<Profile/>}/>
+            <Route path='/patient' element={<Patient/>} />
+            <Route path ='/list' element={<List_apmt/>} />
           </Routes>
 
 
